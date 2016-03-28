@@ -1,0 +1,691 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Angular Material style sheet -->
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+		<style>
+			<!-- for menu component -->
+			.menuBardemoBasicUsage .page-container {
+			  padding: 32px; }
+			.menuBardemoBasicUsage .page {
+			  margin: 0 auto;
+			  padding: 24px;
+			  max-width: 100%;
+			  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); }
+			.menuBardemoBasicUsage .page h1 {
+			  text-align: center;
+			  font-size: 1.8rem;
+			  margin-top: 0;
+			  font-weight: normal; }
+			.menuBardemoBasicUsage .page p {
+			  line-height: 1.6rem; }
+			  
+			<!-- for card-image -->
+			.masonry-list {
+			  left: 50%;
+			  margin: -320px 0 0 -480px;
+			  position: absolute;
+			  top: 50%;
+			  width: 960px;
+			}
+			.masonry-list li {
+			  float: left;
+			  height: 320px;
+			  overflow: hidden;
+			  padding: 0 1px 1px 0;
+			  width: 320px;
+			}
+			.masonry-list li:focus a::after, .masonry-list li:hover a::after {
+			  opacity: 1;
+			  -moz-transform: translate3d(0, 0, 0);
+			  -webkit-transform: translate3d(0, 0, 0);
+			  transform: translate3d(0, 0, 0);
+			}
+			.masonry-list li:focus .tile-primary-content img, .masonry-list li:hover .tile-primary-content img {
+			  -moz-transform: scale3d(1.2, 1.2, 0);
+			  -webkit-transform: scale3d(1.2, 1.2, 0);
+			  transform: scale3d(1.2, 1.2, 0);
+			  -moz-transform-origin: 50% 50%;
+			  -ms-transform-origin: 50% 50%;
+			  -webkit-transform-origin: 50% 50%;
+			  transform-origin: 50% 50%;
+			  -moz-transition: -moz-transform 15000ms cubic-bezier(0, 0, 0.8, 0.9);
+			  -o-transition: -o-transform 15000ms cubic-bezier(0, 0, 0.8, 0.9);
+			  -webkit-transition: -webkit-transform 15000ms cubic-bezier(0, 0, 0.8, 0.9);
+			  transition: transform 15000ms cubic-bezier(0, 0, 0.8, 0.9);
+			}
+			.masonry-list li:focus p,
+			.masonry-list li:focus h2,
+			.masonry-list li:focus .tile-secondary-content, .masonry-list li:hover p,
+			.masonry-list li:hover h2,
+			.masonry-list li:hover .tile-secondary-content {
+			  opacity: 1;
+			}
+			.masonry-list li a::after {
+			  bottom: 40px;
+			  content: '';
+			  display: block;
+			  height: 17px;
+			  opacity: 0;
+			  position: absolute;
+			  right: 40px;
+			  width: 17px;
+			  -moz-transform: translate3d(-10px, -10px, 0);
+			  -webkit-transform: translate3d(-10px, -10px, 0);
+			  transform: translate3d(-10px, -10px, 0);
+			  -moz-transition: all 150ms ease-out;
+			  -o-transition: all 150ms ease-out;
+			  -webkit-transition: all 150ms ease-out;
+			  transition: all 150ms ease-out;
+			}
+			
+			.masonry-list li.tile-person .tile-primary-content {
+			  padding: 0;
+			}
+			.masonry-list li.tile-person .tile-secondary-content {
+			  background-color: rgba(0, 0, 0, 0.7);
+			  -moz-transition: opacity 100ms ease-out;
+			  -o-transition: opacity 100ms ease-out;
+			  -webkit-transition: opacity 100ms ease-out;
+			  transition: opacity 100ms ease-out;
+			}
+			.masonry-list li.tile-person {
+			  text-align: center;
+			}
+			.masonry-list li.tile-person .tile-secondary-content {
+			  display: table;
+			  height: 100%;
+			  padding: 0;
+			  width: 100%;
+			}
+			.masonry-list li.tile-person .tile-secondary-container {
+			  display: table-cell;
+			  vertical-align: middle;
+			}
+			.masonry-list li.tile-person h2 {
+			  font-size: 24px;
+			  position: static;
+			}
+			.masonry-list li.tile-person p {
+			  color: #a18e5c;
+			  font-family: 'Georgia', serif;
+			  font-size: 17px;
+			  margin: .2em;
+			  text-transform: none;
+			}
+			.masonry-list a,
+			.masonry-list button {
+			  color: white;
+			  display: block;
+			  height: 100%;
+			  position: relative;
+			  width: 100%;
+			}
+			.masonry-list .tile-primary-content,
+			.masonry-list .tile-secondary-content {
+			  bottom: 0;
+			  left: 0;
+			  overflow: hidden;
+			  padding: 40px;
+			  position: absolute;
+			  right: 0;
+			  top: 0;
+			}
+			.masonry-list .tile-primary-content {
+			  background-color: #a49058;
+			}
+			.masonry-list .tile-primary-content img {
+			  width: 100%;
+			  -moz-transform: scale3d(1, 1, 1);
+			  -webkit-transform: scale3d(1, 1, 1);
+			  transform: scale3d(1, 1, 1);
+			  -moz-transition: -moz-transform 200ms ease-out;
+			  -o-transition: -o-transform 200ms ease-out;
+			  -webkit-transition: -webkit-transform 200ms ease-out;
+			  transition: transform 200ms ease-out;
+			}
+			.masonry-list .tile-secondary-content {
+			  opacity: 0;
+			  -moz-transition: opacity 250ms ease-out;
+			  -o-transition: opacity 250ms ease-out;
+			  -webkit-transition: opacity 250ms ease-out;
+			  transition: opacity 250ms ease-out;
+			}
+			.masonry-list .tile-secondary-content p,
+			.masonry-list .tile-secondary-content h2 {
+			  opacity: 0;
+			  -moz-transition: opacity 200ms ease-in 100ms;
+			  -o-transition: opacity 200ms ease-in 100ms;
+			  -webkit-transition: opacity 200ms ease-in;
+			  -webkit-transition-delay: 100ms;
+			  transition: opacity 200ms ease-in 100ms;
+			}
+			.masonry-list p,
+			.masonry-list h2 {
+			  text-transform: uppercase;
+			}
+			.masonry-list h2 {
+			  font-size: 12px;
+			  margin: 0;
+			  position: absolute;
+			}
+			.masonry-list p {
+			  font-size: 28px;
+			  font-weight: 300;
+			  line-height: 1.1em;
+			  margin: 1em 0 0;
+			}
+			ul {
+			  list-style: none;
+			  margin: 0;
+			  padding: 0;
+			}
+
+			.preload {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 60px;
+				height: 60px;
+				margin: -42px 0 0 -12px;
+				background: #C60B09;
+				transform: rotate(45deg);
+				animation: spin 1s infinite linear;
+				}
+				@keyframes spin {
+				0% { -webkit-transform:rotate(0deg); }
+				100% { -webkit-transform:rotate(360deg); }
+			}
+		</style>
+		<script src="js/prefixfree.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$("#pld").hide();
+			});
+		</script>
+	</head>
+	<body ng-app="BlankApp" ng-cloak class="effect">
+	  <!--
+		Your HTML content here
+	  -->  
+		<div id="pld"  class="preload"></div>
+		<div layout="row" ng-choak style="background-color:#990000; color:#ffffff;">
+			<md-toolbar-filler hide-xs layout layout-align="center center"> 
+			<img src="https://coronalabs.com/wp-content/uploads/2016/02/corona-logo-grey-1.png" />
+			</md-toolbar-filler>
+			<div flex="60">      
+				<md-menu-bar hide-xs hide-sm>
+				  <md-menu>
+					<button ng-click="$mdOpenMenu()">
+					  Features
+					</button>
+					<md-menu-content>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('share', $event)">
+						  Free
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('Open', $event)">
+						  Enterprise
+						  <span class="md-alt-text"> {{ 'M-O' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('Print', $event)">
+						  CORONA CARD
+						  <span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					</md-menu-content>
+				  </md-menu>
+				  <md-menu>
+					<button ng-click="$mdOpenMenu()">
+					  Edit
+					</button>
+					<md-menu-content>
+					  <md-menu-item class="md-indent">
+						<md-icon md-svg-icon="undo"></md-icon>
+						<md-button ng-click="ctrl.sampleAction('undo', $event)">
+						  Undo
+						  <span class="md-alt-text">{{ 'M-Z' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item class="md-indent">
+						<md-icon md-svg-icon="redo"></md-icon>
+						<md-button ng-click="ctrl.sampleAction('redo', $event)">
+						  Redo
+						  <span class="md-alt-text">{{ 'M-Y' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-divider></md-menu-divider>
+					  <md-menu-item class="md-indent">
+						<md-icon md-svg-icon="content-cut"></md-icon>
+						<md-button ng-click="ctrl.sampleAction('cut', $event)">
+						  Cut
+						  <span class="md-alt-text">{{ 'M-X' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item class="md-indent">
+						<md-icon md-svg-icon="content-copy"></md-icon>
+						<md-button ng-click="ctrl.sampleAction('copy', $event)">
+						  Copy
+						  <span class="md-alt-text">{{ 'M-C' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item class="md-indent">
+						<md-icon md-svg-icon="content-paste"></md-icon>
+						<md-button ng-click="ctrl.sampleAction('paste', $event)">
+						  Paste
+						  <span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-divider></md-menu-divider>
+					  <md-menu-item class="md-indent">
+						<md-button ng-click="ctrl.sampleAction('Find and replace', $event)">
+						  Find and replace...
+						  <span class="md-alt-text">{{ 'M-S-H' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					</md-menu-content>
+				  </md-menu>
+				  <md-menu>
+					<button ng-click="$mdOpenMenu()">
+					  View
+					</button>
+					<md-menu-content>
+					  <md-menu-item type="checkbox" ng-model="ctrl.settings.printLayout">Print layout</md-menu-item>
+					  <md-menu-item class="md-indent">
+						<md-menu>
+						  <md-button ng-click="$mdOpenMenu()">Mode</md-button>
+						  <md-menu-content width="3">
+							<md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'presentation'">Presentation</md-menu-item>
+							<md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'edit'">Edit</md-menu-item>
+							<md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'modifiable'">Modifiable</md-menu-item>
+						  </md-menu-content>
+						</md-menu>
+					  </md-menu-item>
+					  <md-menu-divider></md-menu-divider>
+					  <md-menu-item type="checkbox" ng-model="ctrl.settings.showRuler">Show ruler</md-menu-item>
+					  <md-menu-item type="checkbox" ng-model="ctrl.settings.showEquationToolbar">Show equation toolbar</md-menu-item>
+					  <md-menu-item type="checkbox" ng-model="ctrl.settings.showSpellingSuggestions">Show spelling suggestions</md-menu-item>
+					  <md-menu-divider></md-menu-divider>
+					  <md-menu-item type="checkbox" ng-model="ctrl.settings.compactControls">Compact controls</md-menu-item>
+					  <md-menu-item type="checkbox" ng-model="ctrl.settings.fullScreen">Full screen</md-menu-item>
+					</md-menu-content>
+				  </md-menu>
+				  <md-menu>
+					<button ng-click="$mdOpenMenu()">
+					  Format
+					</button>
+					<md-menu-content>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('bold', $event)">
+						  Bold
+						  <span class="md-alt-text"> {{ 'M-B' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('italic', $event)">
+						  Italic
+						  <span class="md-alt-text">{{ 'M-I' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('underline', $event)">
+						  Underline
+						  <span class="md-alt-text">{{ 'M-U' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('strikethrough', $event)">
+						  Strikethrough
+						  <span class="md-alt-text">{{ 'A-S-5' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('superscript', $event)">
+						  Superscript
+						  <span class="md-alt-text">{{ 'M-.' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-item>
+						<md-button ng-click="ctrl.sampleAction('subscript', $event)">
+						  Subscript
+						  <span class="md-alt-text">{{ 'M-,' | keyboardShortcut }}</span>
+						</md-button>
+					  </md-menu-item>
+					  <md-menu-divider></md-menu-divider>
+					  <md-menu-item><md-button ng-click="ctrl.toggleSetting('clearFormatting')">Clear Formatting</md-button></md-menu-item>
+					</md-menu-content>
+				  </md-menu>
+				</md-menu-bar>
+			</div>
+			<div flex="10" hide-xs hide-sm>
+				<md-button ng-href="{{googleUrl}}" target="_blank">LOGIN</md-button>
+
+			</div>
+			<div flex="10" hide-xs hide-sm>
+				<md-button class="md-raised">DOWNLOAD</md-button>
+			</div>
+			<md-fab-speed-dial show-xs show-sm hide-md hide-sm hide-lg md-direction="left" class="md-scale">
+				<md-fab-trigger>
+					<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+						<md-icon md-svg-src="#"></md-icon>
+					</md-button>
+				</md-fab-trigger>
+				<md-fab-actions>
+					<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+						<md-icon md-svg-src="#"></md-icon>
+					</md-button>
+					<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+						<md-icon md-svg-src="img/icons/android.svg"></md-icon>
+					</md-button>
+					<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+						<md-icon md-svg-src="img/icons/android.svg"></md-icon>
+					</md-button>
+					<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+						<md-icon md-svg-src="img/icons/android.svg"></md-icon>
+					</md-button>
+					<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+						<md-icon md-svg-src="img/icons/android.svg"></md-icon>
+					</md-button>
+				</md-fab-actions>
+			</md-fab-speed-dial>
+		</div>
+
+		<div layout="row" layout-align="center center" ng-choak style="background-color:#4d0000;">
+			<div layout="column" layout-align="center center">
+				<h1 class="md-display-1" style="color:#ffffff;">Create amazing games and apps <span style="color:#e57e3e;">10x faster</span></h1>
+				<h2 class="md-headline" style="color:#ffffff;">The ultimate 2D development platform</h2>
+				<div class="md-whiteframe-z2" style="background-color:#ff1a1a;padding:5px; border-radius:4px;">      <span class="error" ng-show="myinput.$error.email">        Not valid email!</span><input type="email" name="myinput" ng-model="myinput" placeholder="Email"><md-button class="md-raised" style="background-color:#e57e3e; color:#ffffff;">DOWNLOAD FREE SDK</md-button></div>
+				</br></br></br></br></br></br></br></br></br>
+			</div>
+		</div>
+
+		<div layout="row" layout-align="center center" layout-xs="column" layout-gt-lg="row" class="md-whiteframe-z2">
+			<div flex>
+				<img width="514" height="289" ng-src="https://coronalabs.com/wp-content/uploads/2016/02/why_corona.png" />
+			</div>
+			<div flex> 
+				<p class="md-display-1">WHY CHOOSE CORONA SDK ?</p>
+				<p class="md-subhead">Corona SDK is a cross-platform framework that allows developers to create 2D games and apps up to 10x faster than other platforms using easy-to-learn Lua. Our elegant APIs make adding complex features easy and our workflow lets you see changes instantly. And you can publish to all major platforms from a single code base.</p>
+				<md-button class="md-raised">LEARN MORE</md-button>
+			</div>
+		</div>
+
+		<div layout="row" ng-controller="namesCtrl" ng-model="mindex" layout-align="center center" style="background-color:#4d0000;" hide-xs layout-wrap>
+			<div flex="5" flex-xs="100" ng-click="previousImage()" >
+				<img ng-src="./left.jpg" />
+			</div>
+			<md-content layout-padding flex="90" style="background-color:#4d0000;">
+				<p> {{ quotes[mindex].description }} </p> 
+				<p>  <img src="{{ quotes[mindex].imgfig }}" width="300px" alt="img"  /> </p> 
+				<p>  {{ quotes[mindex].name }} </p>
+				<p> {{ quotes[mindex].post }} </p>
+			</md-content>
+			<div flex="5" flex-xs="100" ng-click="nextImage()" >
+				<img ng-src="./right.jpg" />
+			</div>
+		</div>
+
+		<div layout="row" layout-align="center center" layout-xs="column" layout-gt-lg="row">
+			<div flex layout="column">
+				<p class="md-display-1">BUILD <span style="color:#e57e3e;">10X FASTER!</span></p>
+				<p class="md-caption">Create rich mobile games and apps in record time</p>
+				<p class="md-subhead" flex="50">Corona is designed to enable super-fast development. Our elegant APIs make adding complex features easy. 
+				Our workflow lets you see changes instantly. And you develop in Lua, a fast and easy-to-learn language.It all adds up to unmatched development and iteration speed.</p>
+			</div>
+			<div flex style="margin-top:-120px;">
+				<iframe width="560" height="300" src="https://www.youtube.com/embed/Q8TXgCzxEnw" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+
+		<div layout="row" layout-xs="column" layout-gt-lg="row">
+			<div flex class="md-whiteframe-z2">
+				<md-toolbar-filler> 
+					<img flex-offset="10" ng-src="https://coronalabs.com/wp-content/uploads/2016/02/support_platforms.jpg" />
+				</md-toolbar-filler>
+			</div>
+			<div flex class="md-whiteframe-z2">
+				<div>
+					<p class="md-display-1">SUPPORT ALL <span style="color:#e57e3e;">MAJOR PLATFORMS</span></p>
+					<p class="md-caption">Maximum code reusability, minimum pain</p>
+					<p>Corona allows you to publish to all the major platforms and is best-in-class for code reusability. Forget about crazy fragmentation.</p>
+					<ul>
+						<li>iOS (including tvOS)</li>
+						<li>Android (including Android TV)</li>
+						<li>Kindle</li>
+						<li>Windows Phone 8</li>
+						<li>Mac and Windows desktop</li>
+					</ul>
+					<p>In addition, with <a ng-href="#" style="color:#e57e3e; text-decoration:none;">Corona Enterprise</a>, you can even call any native API or library from your Corona app.</p>
+				</div>
+			</div>
+		</div>
+
+		<div layout="row" layout-align="center center" ng-choak>
+			<div layout="column" layout-align="center center">
+				<h1 class="md-display-1">WHO'S USING <span style="color:#e57e3e;">CORONA SDK</span></h1>
+			</div>
+		</div>
+		<div layout="row" layout-xs="column" layout-gt-lg="row">
+			<div flex="25" layout-align="center center">
+				<ul class="masonry-list">
+				  <li class="tile-person">
+					<a href="#">
+					  <div class="tile-primary-content">
+						<img src="https://coronalabs.com/wp-content/uploads/2016/02/app-hopiko.jpg" alt="">
+					  </div>
+					  <div class="tile-secondary-content">
+						<div class="tile-secondary-container">
+							<h2>Chris Grabinski</h2>
+							<p>Front-end Development</p>
+							<br><br><br><br><br><br><br><br><br>
+							<!-- <md-button class="md-fab md-primary md-hue-2" aria-label="Profile">
+								<md-icon md-svg-src=""></md-icon>
+								<md-icon md-svg-src=""></md-icon>
+							</md-button>	 -->					
+						</div>
+					  </div>
+					</a>
+				  </li>
+				</ul>
+			</div>
+			<div flex="25">
+				<ul class="masonry-list">
+				  <li class="tile-person">
+					<a href="#">
+					  <div class="tile-primary-content">
+						<img src="https://coronalabs.com/wp-content/uploads/2016/02/app-funrun.jpg" alt="">
+					  </div>
+					  <div class="tile-secondary-content">
+						<div class="tile-secondary-container">
+						  <h2>Chris Grabinski</h2>
+						  <p>Front-end Development</p>
+						</div>
+					  </div>
+					</a>
+				  </li>
+				</ul>
+			</div>
+			<div flex="25">
+				<ul class="masonry-list">
+				  <li class="tile-person">
+					<a href="#">
+					  <div class="tile-primary-content">
+						<img src="https://coronalabs.com/wp-content/uploads/2016/02/app-nba.jpg" alt="">
+					  </div>
+					  <div class="tile-secondary-content">
+						<div class="tile-secondary-container">
+						  <h2>Chris Grabinski</h2>
+						  <p>Front-end Development</p>
+						</div>
+					  </div>
+					</a>
+				  </li>
+				</ul>
+			</div>
+			<div flex="25">
+				<ul class="masonry-list">
+				  <li class="tile-person">
+					<a href="#">
+					  <div class="tile-primary-content">
+						<img src="https://coronalabs.com/wp-content/uploads/2016/02/app-freeze.jpg" alt="">
+					  </div>
+					  <div class="tile-secondary-content">
+						<div class="tile-secondary-container">
+						  <h2>Chris Grabinski</h2>
+						  <p>Front-end Development</p>
+						</div>
+					  </div>
+					</a>
+				  </li>
+				</ul>
+			</div>
+		</div>
+
+		<div layout="row" layout-align="center center" ng-choak>
+			<div layout="column" layout-align="center center">
+				<h1 class="md-display-1">FROM THE <span style="color:#e57e3e;">BLOG</span></h1>
+			</div>
+		</div>
+		
+		<div layout="row" layout-xs="column" layout-gt-lg="row" layout-align="center center" style="color:#e57e3e;">
+		</div>
+		<div layout="row" layout-align="center center" style="background-color:#e57e3e; color:#ffffff;">
+			<md-button class="md-fab md-hue-2" aria-label="Profile">
+				<md-icon md-svg-src=""></md-icon>
+			</md-button>	
+			<p><span class="md-display-1">GET STARTED WITH CORONA SDK</span><br><span class="md-subhead">GET STARTED WITH CORONA SDK</span></p>
+			<md-button class="md-raised" style="background-color:#e57e4e; color:#ffffff;">DOWNLOAD CORONA SDK</md-button>
+		</div>
+
+		<div layout="row" layout-align="center center" style="background-color:#1b1b1b; color:#ababab;" layout-xs="column" layout-gt-lg="row">
+			<div flex>
+				<p>Our mission is to enable anyone to create great mobile apps. Our flagship product, Corona SDK, is the world’s most advanced 2D mobile development platform.<br>Corona Labs is a <a style="color:#e57e3e;">Perk</a> company.
+				<br><a href="#" style="color:#e57e3e; text-decoration:none;">Read More</a>|<a href="#" style="color:#e57e3e; text-decoration:none;">We're Hiring</a></p>
+			</div>
+			<div flex>
+				<h1 class="md-subhead">SOCIAL</h1>
+				<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+				  <md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>
+				</md-button>
+				<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+				  <md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>
+				</md-button>
+				<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+				  <md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>
+				</md-button>
+				<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+				  <md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>
+				</md-button>
+				<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+				  <md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>
+				</md-button>
+				<md-button class="md-fab md-mini md-primary" aria-label="Use Android">
+				  <md-icon md-svg-src="img/icons/android.svg" style="color: greenyellow;"></md-icon>
+				</md-button>
+				<h1 class="md-subhead">SUPPORT</h1>
+				<h1 class="md-subhead" style="color:#e57e3e;">Contact Corona Labs</h1>	
+			</div>
+			<div flex>
+				<h1 class="md-subhead">SUBSCRIBE TO OUR NEWSLETTER</h1>
+				<input type="text" placeholder="Email"><br><md-button class="md-raised" style="background-color:#e57e3e; color:#ffffff;">SUBSCRIBE</md-button>
+			</div>
+		</div>
+
+		<div layout="row" layout-align="center center" style="background-color:#1b1b1b; color:#ababab;">
+
+			<md-toolbar-filler layout layout-align="center center"> 
+				<img src="https://coronalabs.com/wp-content/uploads/2016/02/perk-grey@2x.png"  alt="" width="42" style="margin: 0px 1px 2px 3px;"/>
+			</md-toolbar-filler>
+			Company.  All rights reserved. 
+			<a href="/terms-and-conditions/" style="color:#e57e3e; text-decoration:none;">Terms</a> | <a href="/privacy-policy/" style="color:#e57e3e; text-decoration:none;">Privacy</a>
+		</div>
+
+
+		<!-- Angular Material requires Angular.js Libraries -->
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+		<!-- Angular Material Library -->
+		<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+	  
+		<!-- Your application bootstrap  -->
+		<script type="text/javascript">    
+			/**
+			 * You must include the dependency on 'ngMaterial' 
+			 */
+			angular.module('BlankApp', ['ngMaterial'])
+			.config(function($mdIconProvider) {
+				$mdIconProvider
+				.defaultIconSet('img/icons/sets/core-icons.svg', 24);
+			})
+			.filter('keyboardShortcut', function($window) {
+				return function(str) {
+				if (!str) return;
+				var keys = str.split('-');
+				var isOSX = /Mac OS X/.test($window.navigator.userAgent);
+				var seperator = (!isOSX || keys.length > 2) ? '+' : '';
+				var abbreviations = {
+				M: isOSX ? '⌘' : 'Ctrl',
+				A: isOSX ? 'Option' : 'Alt',
+				S: 'Shift'
+				};
+				return keys.map(function(key, index) {
+				var last = index == keys.length - 1;
+				return last ? key : abbreviations[key];
+				}).join(seperator);
+				};
+			})
+			.controller('DemoBasicCtrl', function DemoCtrl($mdDialog) {
+				this.settings = {
+				printLayout: true,
+				showRuler: true,
+				showSpellingSuggestions: true,
+				presentationMode: 'edit'
+				};
+				this.sampleAction = function(name, ev) {
+				$mdDialog.show($mdDialog.alert()
+				.title(name)
+				.textContent('You triggered the "' + name + '" action')
+				.ok('Great')
+				.targetEvent(ev)
+				);
+				};
+			})
+			.controller('namesCtrl', function($scope, $interval) {
+				$scope.mindex = 1;
+				$scope.quotes = [ 
+				{"description" : "When we launched QuizTix in 2013 we chose Corona SDK not only because if its fast 2D performance but because of the speed and ease of development. Since then it has constantly evolved with the industry into the mature cross-platform SDK that it is today. www.quiztix.co", "imgfig" : "a.jpg", "name" : "Ian Masters", "post" : "Creative Director, QuizTix"}, 
+				{"description" : "Corona SDK makes game development so easy compared to the effort I had to spend for my first games in the 80s. If I'd had it back then, Donald Trump would be my assistant today. www.freeze2.com", 																			"imgfig" : "b.jpg", "name" : "Andreas von Lepel", "post" : "Creator of the award-winning arcade-<br>puzzler Freeze! series"}, 
+				{"description" : "The decision to author my word games using Corona SDK was a great one. My reputation as America’s leading puzzle creator is important, and my dev team at Adveractive puts out the superior quality apps that my puzzle players expect! www.hoytinteractivemedia.com", 		"imgfig" : "c.jpg", "name" : "David L. Hoyt", "post" : "The Man Who Puzzles America"},
+				{"description" : "Corona has been an absolute staple for us at BorderLeap across our apps and games. It’s simplicity, flexibility and reliability is fantastic - and its ability to provide a framework for super-fast development has been invaluable. www.borderleap.com", 					"imgfig" : "d.jpg", "name" : "Nate Dicken", "post" : "Founder, BorderLeap"},
+				{"description" : "Corona SDK is an essential tool I've used for years to easily design and publish my award-winning children's apps across both iOS and Android. I could never have created so many apps so quickly without the software- thanks Corona! www.lauratallardy.com", 				"imgfig" : "e.jpg", "name" : "Laura Tallardy", "post" : "Award-winning Developer"},
+				{"description" : "Corona allows me to focus on the fun... with minimal code I can get a fully functional prototype up and running in no time. I love how easy and intuitive the code is. As an artist, it's the perfect sdk for me. www.chunkyapps.com",			 							"imgfig" : "f.jpg", "name" : "Noah Malewicz", "post" : "Founder, Chunky Apps"}];
+				$scope.len  =$scope.	quotes.length;
+				$scope.nextImage = function() { 
+				if($scope.mindex < $scope.len){
+				$scope.mindex +=1;}
+				else{
+				$scope.mindex=0;}
+			}
+			$scope.previousImage =  function() {
+				if($scope.mindex > 0){
+				$scope.mindex -= 1;}
+				else{
+				$scope.mindex = $scope.len;}
+			}
+			$interval(function() { 
+				$scope.nextImage();
+				}, 3000); 
+			});
+		</script>
+	  
+	</body>
+</html>

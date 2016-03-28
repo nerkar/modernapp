@@ -1,0 +1,109 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+</head>
+<body ng-app="BlankApp"  ng-cloak>
+  <!--
+    Your HTML content here
+  -->  
+  <div ng-controller="namesCtrl" ng-model="mindex"  layout="row" layout-wrap   >
+  <div flex="30" flex-xs="100" ng-click="previousImage()" >
+ First Div 
+  </div>
+  <div flex="45" flex-xs="100" >
+<p> {{ quotes[mindex].description }} </p> 
+<p>  <img src="{{ quotes[mindex].imgfig }}" width="300px" alt="img"  /> </p> 
+<p>  {{ quotes[mindex].name }} </p>
+<p> {{ quotes[mindex].post }} </p>
+
+  </div>
+  <div flex="25" flex-xs="100" ng-click="nextImage()" >
+Third Div
+  </div>
+
+
+</div>
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+
+
+  
+  <!-- Your application bootstrap  -->
+  <script type="text/javascript">    
+    /**
+     * You must include the dependency on 'ngMaterial' 
+     */
+    angular.module('BlankApp', ['ngMaterial']).controller('namesCtrl', function($scope, $interval) {
+
+$scope.mindex = 1;
+
+
+$scope.quotes = [ {"description" : "sample text for displaying avove the image", "imgfig" : "a.jpg", "name" : "David", "post" : "CEO of Gadha.com"}, {"description" : "sample text for displaying avove the image", "imgfig" : "b.jpg", "name" : "gale", "post" : "CEO of Gadha.com"}, {"description" : "sample text for displaying avove the image", "imgfig" : "c.jpg", "name" : "Marry", "post" : "CEO of Gadha.com"}   ];
+
+$scope.len  =$scope.	quotes.length;
+
+
+
+
+
+ 
+
+
+$scope.nextImage = function() { 
+
+	if($scope.mindex < $scope.len)
+	{
+	
+	$scope.mindex +=1;
+
+	}
+	else
+	{
+	$scope.mindex=0;
+
+	}
+}
+
+
+
+
+$scope.previousImage =  function() {
+
+		if($scope.mindex > 0)
+		{
+		$scope.mindex -= 1;
+		}
+		else
+		{
+		$scope.mindex = $scope.len;
+
+		}
+}
+
+
+
+$interval(function() { 
+$scope.nextImage();
+
+ }, 3000);
+
+});
+
+
+
+
+
+
+  </script>
+  
+</body>
+</html>
